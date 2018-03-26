@@ -45,6 +45,8 @@ public class AadharAnalysisDriver extends Configured implements Tool {
         stateWiseCount.setJobName("Aadhar Analysis");
         stateWiseCount.setJarByClass(AadharAnalysisDriver.class);
 
+        stateWiseCount.getConfiguration().set("mapreduce.output.textoutputformat.separator", ",");
+
         FileInputFormat.addInputPath(stateWiseCount, new Path(args[0]));
         FileOutputFormat.setOutputPath(stateWiseCount, new Path(args[1]));
 
