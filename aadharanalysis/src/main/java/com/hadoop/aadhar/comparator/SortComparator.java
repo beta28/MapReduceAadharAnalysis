@@ -13,7 +13,7 @@ public class SortComparator extends WritableComparator {
         return v1.get() < v2.get() ? 1 : v1.get() == v2.get() ? 0 : -1;
     }
 
-    protected SortComparator() {
+    public SortComparator() {
         super(IntWritable.class, true);
     }
 }
