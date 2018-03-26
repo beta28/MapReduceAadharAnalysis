@@ -15,7 +15,6 @@ public class UIDMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
     private IntWritable COUNT = new IntWritable();
 
     /**
-     *
      * @param key
      * @param value
      * @param context
@@ -24,13 +23,13 @@ public class UIDMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
      */
     public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
         String[] data = value.toString().split(",");
-        if (key.get() != 0) {
+        if (key.get() == 0)
+            LOG.info("Line skipped. Key is {}", key.get());
+        else {
             STATE.set(data[1]);
             COUNT.set(Integer.parseInt(data[8]));
             context.write(STATE, COUNT);
             LOG.info("State : {} , Count : {}", STATE.toString(), COUNT.toString());
         }
-        LOG.info("Line skipped. Key is {}", key.get());
     }
-
 }
