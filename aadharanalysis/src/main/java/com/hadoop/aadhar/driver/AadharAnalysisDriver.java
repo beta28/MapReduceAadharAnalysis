@@ -19,6 +19,7 @@ import org.apache.hadoop.util.ToolRunner;
 import java.io.IOException;
 
 public class AadharAnalysisDriver extends Configured implements Tool {
+    private static final String TEXT_SEPARATOR = "mapreduce.output.textoutputformat.separator";
 
     @Override
     public int run(String[] args) throws Exception {
@@ -45,7 +46,7 @@ public class AadharAnalysisDriver extends Configured implements Tool {
         stateWiseCount.setJobName("Aadhar Analysis");
         stateWiseCount.setJarByClass(AadharAnalysisDriver.class);
 
-        stateWiseCount.getConfiguration().set("mapreduce.output.textoutputformat.separator", ",");
+        stateWiseCount.getConfiguration().set(TEXT_SEPARATOR, ",");
 
         FileInputFormat.addInputPath(stateWiseCount, new Path(args[0]));
         FileOutputFormat.setOutputPath(stateWiseCount, new Path(args[1]));
